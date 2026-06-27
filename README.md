@@ -1,69 +1,65 @@
-Predicting IPL Match Outcomes Using Random Forest 🏏
 Overview
-This repository contains a complete machine learning workflow designed to predict the winning team of an Indian Premier League (IPL) cricket match. By leveraging historical match data—including venues, toss decisions, and competing teams—this project demonstrates data preprocessing, categorical encoding, and predictive modeling using a Random Forest Classifier.
+This repository contains a complete machine learning workflow designed to predict the winning team of an Indian Premier League (IPL) cricket match. By leveraging historical match data, this project demonstrates data preprocessing, categorical encoding, and predictive modeling using a Random Forest Classifier.
 
-📂 Repository Structure
-IPL-Predictor/
-│
-├── data/
-│   └── matches.csv                 # The raw IPL matches dataset
-│
-├── model/
-│   ├── match_winner_model.pkl      # Trained Random Forest model
-│   ├── feature_encoders.pkl        # LabelEncoders for input features
-│   └── target_encoder.pkl          # LabelEncoder for the target variable
-│
-├── notebook/
-│   └── Minor Project.ipynb         # Jupyter Notebook with complete EDA and training code
-│
-├── results/
-│   ├── MINOR PROJECT 1.pdf         # Complete project report
-│   └── [Screenshots/Plots]         # Confusion matrix and evaluation plots
-│
-├── train_model.py                  # Python script for model training and artifact generation
-└── README.md                       # Project documentation
+Repository Structure
+data/ – Contains the matches.csv dataset.
 
-🎯 Problem Statement
-Cricket is a highly unpredictable sport influenced by numerous dynamic factors. The goal of this project is to predict the winning team of an IPL match based strictly on pre-match and toss data. 
-Specifically, we want to evaluate how much influence the playing venue, the competing teams, the toss winner, and the toss decision (bat/field) have on the final outcome.
+model/ – Contains the trained Random Forest model and LabelEncoders (.pkl files).
 
-Dataset Description
-The dataset utilized for this project is based on historical IPL match data.
+notebook/ – Contains the Jupyter Notebook (Minor Project.ipynb) used for exploratory data analysis (EDA) and model training.
 
-Target Variable: winner (The team that won the match)
+results/ – Contains the project report (MINOR PROJECT 1.pdf) and generated evaluation plots (confusion matrix, result graphs).
 
-Features Used: * team1: The first playing team
+README.md – Complete project details and documentation.
 
-team2: The second playing team
+Problem Statement
+The objective of this project is to predict the winning team of an IPL cricket match based on historical match data, specifically looking at pre-match factors including the venue, toss decisions, and competing teams.
 
-venue: The stadium where the match was played
+Dataset
+The dataset utilized for this project is the "IPL Complete Dataset" sourced from Kaggle. It contains historical data of IPL matches spanning multiple seasons.
 
-toss_winner: The team that won the coin toss
+Dataset Link: Kaggle - IPL Complete Dataset
 
-toss_decision: The decision made by the toss winner (bat or field)
+Target Variable: winner
 
-Data Cleaning Note: Matches that ended with "no result" (e.g., due to rain) resulted in missing values in the target column. These specific rows were dropped from the training set.
+Features Used: team1, team2, toss_winner, toss_decision, and venue.
 
 Methodology
-Data Preprocessing & Cleaning:
+To prepare the raw data and train the machine learning model, the following steps were executed:
 
-Removed any duplicate records to prevent model bias.
+Data Preprocessing:
 
-Dropped irrelevant columns (umpires, dates, match types) to focus purely on environmental and team factors.
+Duplicate Removal: Checked for and removed duplicate rows to prevent model bias.
 
-Handled missing values by dropping corrupted rows.
+Feature Selection: Dropped irrelevant columns (like umpires or match dates) to focus strictly on teams, toss dynamics, and venue.
+
+Handling Missing Values: Matches that ended with "no result" resulted in missing values in the winner column. These rows were dropped.
 
 Feature Encoding:
 
-Machine learning models require numerical inputs. A LabelEncoder was used to convert string categories into numerical representations.
+Machine learning models require numerical inputs. A LabelEncoder was used to convert string categories into numerical representations for the teams, venues, and toss decisions.
 
-Special Handling: Combined all team names across team1, team2, and toss_winner before fitting the encoder to ensure uniform numerical mapping for every franchise, regardless of which column they appeared in.
-
-Model Selection & Training:
+Model Training:
 
 Algorithm: Random Forest Classifier
 
 Hyperparameters: n_estimators=150, max_depth=12, random_state=42
 
-Data Split: 80% Training / 20% Testing
+Data Split: 80% Training Data / 20% Testing Data
 
+Results and Evaluation Metrics
+The model was evaluated using standard classification metrics.
+
+Accuracy: 0.4688 (46.88%) - The overall percentage of matches the model predicted correctly.
+
+Precision: 0.4831 - The accuracy of the positive predictions.
+
+Recall: 0.4688 - The model's ability to find all the correct winning instances.
+
+F1-Score: 0.4655 - The harmonic mean of precision and recall.
+
+Confusion Matrix Analysis:
+The visual confusion matrix (available in the results/ folder) visualizes the exact breakdown of true positive predictions versus false classifications across all encoded IPL teams, showing exactly where the model succeeded and where it confused one team for another.
+
+Conclusion
+This minor project successfully demonstrates a complete machine learning workflow. By utilizing a Random Forest Classifier, we were able to predict IPL match outcomes based on toss decisions and venue locations. The evaluation metrics indicate that while cricket matches are highly unpredictable and depend on many in-game variables, baseline pre-match data still provides measurable predictive signals.
